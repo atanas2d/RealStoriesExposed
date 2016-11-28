@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RealStoriesExposed", "RealStoriesExposed\RealStoriesExposed.csproj", "{B4454B9F-76B8-47CD-B560-BCB8DAD464DF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RealStoriesExposed.Tests", "RealStoriesExposed.Tests\RealStoriesExposed.Tests.csproj", "{A0E0329A-F4CF-4DF7-B8F4-D28A59BBF040}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B4454B9F-76B8-47CD-B560-BCB8DAD464DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B4454B9F-76B8-47CD-B560-BCB8DAD464DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B4454B9F-76B8-47CD-B560-BCB8DAD464DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B4454B9F-76B8-47CD-B560-BCB8DAD464DF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A0E0329A-F4CF-4DF7-B8F4-D28A59BBF040}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A0E0329A-F4CF-4DF7-B8F4-D28A59BBF040}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A0E0329A-F4CF-4DF7-B8F4-D28A59BBF040}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A0E0329A-F4CF-4DF7-B8F4-D28A59BBF040}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
