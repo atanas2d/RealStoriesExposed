@@ -14,8 +14,9 @@ namespace RealStoriesExposed.Data
         public RSEDbContext()
             : base("RealStoriesExposedConnection")
         {
+            //Database.SetInitializer(new MigrateDatabaseToLatestVersion<TrackingSystemDbContext, Configuration>());
         }
-
+                
         public IDbSet<Story> Stories { get; set; }
 
         public static RSEDbContext Create()
