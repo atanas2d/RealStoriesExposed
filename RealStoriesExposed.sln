@@ -7,6 +7,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RealStoriesExposed", "RealS
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RealStoriesExposed.Tests", "RealStoriesExposed.Tests\RealStoriesExposed.Tests.csproj", "{A0E0329A-F4CF-4DF7-B8F4-D28A59BBF040}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RealStoriesExposed.Data", "RealStoriesExposed.Data\RealStoriesExposed.Data.csproj", "{D6746B06-3703-4EE5-ABDA-772DC57A2CED}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RealStoriesExposed.Models", "RealStoriesExposed.Models\RealStoriesExposed.Models.csproj", "{BA4A0A25-EF68-4CC8-B113-9762C7290E03}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +25,14 @@ Global
 		{A0E0329A-F4CF-4DF7-B8F4-D28A59BBF040}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A0E0329A-F4CF-4DF7-B8F4-D28A59BBF040}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A0E0329A-F4CF-4DF7-B8F4-D28A59BBF040}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D6746B06-3703-4EE5-ABDA-772DC57A2CED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D6746B06-3703-4EE5-ABDA-772DC57A2CED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D6746B06-3703-4EE5-ABDA-772DC57A2CED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D6746B06-3703-4EE5-ABDA-772DC57A2CED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BA4A0A25-EF68-4CC8-B113-9762C7290E03}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BA4A0A25-EF68-4CC8-B113-9762C7290E03}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BA4A0A25-EF68-4CC8-B113-9762C7290E03}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BA4A0A25-EF68-4CC8-B113-9762C7290E03}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

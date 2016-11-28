@@ -8,7 +8,14 @@ namespace RealStoriesExposed.Models
 {
     public class Story
     {
-     
+        public Guid StoryId { get; set; }
 
+        public string Title { get; set; }
+
+        public string Content { get; set; }
+
+        public virtual ApplicationUser User { get; set;}
+
+        public DateTime DateCreated { get; set;}
     }
 }
