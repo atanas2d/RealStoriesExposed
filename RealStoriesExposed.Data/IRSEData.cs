@@ -8,8 +8,12 @@
         IRepository<ApplicationUser> Users
         {
             get;
-        }       
-             
+        }
+
+        IRepository<Story> Stories
+        {
+            get;
+        }
 
     }
 }

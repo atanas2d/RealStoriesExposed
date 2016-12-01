@@ -6,16 +6,12 @@ using System.Threading.Tasks;
 
 namespace RealStoriesExposed.Models
 {
-    public class Story
-    {
-        public Guid StoryId { get; set; }
-
+    public class Story : BaseModel
+    {        
         public string Title { get; set; }
 
         public string Content { get; set; }
 
         public virtual ApplicationUser Author { get; set;}
-
-        public DateTime DateCreated { get; set;}
     }
 }

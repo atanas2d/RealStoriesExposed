@@ -1,4 +1,8 @@
-﻿using RealStoriesExposed.Data;
+﻿using AutoMapper;
+using AutoMapper.QueryableExtensions;
+using RealStoriesExposed.Data;
+using RealStoriesExposed.Models;
+using RealStoriesExposed.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,15 +11,17 @@ using System.Web.Mvc;
 
 namespace RealStoriesExposed.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
         public ActionResult Index()
         {
-            var dbContext = new RSEDbContext();
+            var stories = Mapper.Map<List<Story>, List<StoryViewModel>>(Data.Stories.All().ToList());
+            //var stories = Data.Stories
+            //    .All()
+            //    .ProjectTo<StoryViewModel>()
+            //    .ToList();           
 
-            var dbTest = dbContext.Users.Count();
-
-            return View();
+            return View(stories);
         }
 
         public ActionResult About()

@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RealStoriesExposed.Data", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RealStoriesExposed.Models", "RealStoriesExposed.Models\RealStoriesExposed.Models.csproj", "{BA4A0A25-EF68-4CC8-B113-9762C7290E03}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RealStoriesExposed.Common", "RealStoriesExposed.Common\RealStoriesExposed.Common.csproj", "{6E92BBE0-6706-4FF1-B798-870F4FFD79F1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{BA4A0A25-EF68-4CC8-B113-9762C7290E03}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BA4A0A25-EF68-4CC8-B113-9762C7290E03}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BA4A0A25-EF68-4CC8-B113-9762C7290E03}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6E92BBE0-6706-4FF1-B798-870F4FFD79F1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6E92BBE0-6706-4FF1-B798-870F4FFD79F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6E92BBE0-6706-4FF1-B798-870F4FFD79F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6E92BBE0-6706-4FF1-B798-870F4FFD79F1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

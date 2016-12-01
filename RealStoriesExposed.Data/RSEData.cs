@@ -3,8 +3,8 @@
     using System;
     using System.Collections.Generic;
     using System.Data.Entity;
-    using RealStoriesExposed.Data.Repositories;
-    using RealStoriesExposed.Models;
+    using Repositories;
+    using Models;
 
     public class RSEData : IRSEData
     {
@@ -19,32 +19,40 @@
         public RSEData(DbContext context)
         {
             this.context = context;
-            this.repositories = new Dictionary<Type, object>();
+            repositories = new Dictionary<Type, object>();
         }
 
         public IRepository<ApplicationUser> Users
         {
             get
             {
-                return this.GetRepository<ApplicationUser>();
+                return GetRepository<ApplicationUser>();
+            }
+        }
+
+        public IRepository<Story> Stories
+        {
+            get
+            {
+                return this.GetRepository<Story>();
             }
         }
 
         private IRepository<T> GetRepository<T>() where T : class
         {
             var typeOfRepository = typeof(T);
-            if (!this.repositories.ContainsKey(typeOfRepository))
+            if (!repositories.ContainsKey(typeOfRepository))
             {
                 var newRepository = Activator.CreateInstance(typeof(Repository<T>), context);
-                this.repositories.Add(typeOfRepository, newRepository);
+                repositories.Add(typeOfRepository, newRepository);
             }
 
-            return (IRepository<T>) this.repositories[typeOfRepository];
+            return (IRepository<T>) repositories[typeOfRepository];
         }
 
         public int SaveChanges()
         {
-            return this.context.SaveChanges();
+            return context.SaveChanges();
         }
     }
 }
