@@ -16,10 +16,6 @@ namespace RealStoriesExposed.Controllers
         public ActionResult Index()
         {
             var stories = Mapper.Map<List<Story>, List<StoryViewModel>>(Data.Stories.All().ToList());
-            //var stories = Data.Stories
-            //    .All()
-            //    .ProjectTo<StoryViewModel>()
-            //    .ToList();           
 
             return View(stories);
         }
