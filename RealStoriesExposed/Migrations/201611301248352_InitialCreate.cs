@@ -34,7 +34,7 @@ namespace RealStoriesExposed.Migrations
                 "dbo.Stories",
                 c => new
                     {
-                        Id = c.Guid(nullable: false),
+                        Id = c.Int(nullable: false),
                         Title = c.String(),
                         Content = c.String(),
                         CreatedOn = c.DateTime(),

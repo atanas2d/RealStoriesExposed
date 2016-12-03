@@ -227,6 +227,10 @@
     <Compile Include="Migrations\201611301318378_Added_Stories.Designer.cs">
       <DependentUpon>201611301318378_Added_Stories.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201612021347460_MyFridayMigration.cs" />
+    <Compile Include="Migrations\201612021347460_MyFridayMigration.Designer.cs">
+      <DependentUpon>201612021347460_MyFridayMigration.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="ViewModels\AccountViewModels.cs" />
     <Compile Include="ViewModels\ApplicationUserViewModel.cs" />
@@ -239,11 +243,11 @@
     <Content Include="Content\admin.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
-    <Content Include="Content\clean-blog.css" />
+    <Content Include="Content\realstoriesexposed.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="Content\Site.css" />
+    <Content Include="Content\site.css" />
     <Content Include="Images\about-bg.jpg" />
     <Content Include="Images\contact-bg.jpg" />
     <Content Include="Images\home-bg.jpg" />
@@ -342,6 +346,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201611301318378_Added_Stories.resx">
       <DependentUpon>201611301318378_Added_Stories.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612021347460_MyFridayMigration.resx">
+      <DependentUpon>201612021347460_MyFridayMigration.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

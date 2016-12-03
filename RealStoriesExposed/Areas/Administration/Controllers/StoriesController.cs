@@ -25,7 +25,7 @@ namespace RealStoriesExposed.Areas.Administration.Controllers
         }
 
         // GET: Administration/Stories/Details/5
-        public ActionResult Details(Guid? id)
+        public ActionResult Details(int? id)
         {
             if (id == null)
             {
@@ -42,7 +42,10 @@ namespace RealStoriesExposed.Areas.Administration.Controllers
         // GET: Administration/Stories/Create
         public ActionResult Create()
         {
-            return View();
+            var StoryVM = new StoryViewModel();
+            StoryVM.Users = new SelectList(Data.Users.All(), "Id", "Email"); 
+
+            return View(StoryVM); 
         }
 
         // POST: Administration/Stories/Create
@@ -50,12 +53,13 @@ namespace RealStoriesExposed.Areas.Administration.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Title,Content,CreatedOn,isDelated")] Story story)
+        public ActionResult Create([Bind(Include = "Id,Title,Content,CreatedOn")] StoryViewModel story)
         {
             if (ModelState.IsValid)
             {
-                story.Id = Guid.NewGuid();
-                Data.Stories.Add(story);
+                var dbStory = Mapper.Map<Story>(story);
+                dbStory.CreatedOn = DateTime.Now;
+                Data.Stories.Add(dbStory);
                 Data.Stories.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -64,7 +68,7 @@ namespace RealStoriesExposed.Areas.Administration.Controllers
         }
 
         // GET: Administration/Stories/Edit/5
-        public ActionResult Edit(Guid? id)
+        public ActionResult Edit(int? id)
         {
             if (id == null)
             {
@@ -95,7 +99,7 @@ namespace RealStoriesExposed.Areas.Administration.Controllers
         }
 
         // GET: Administration/Stories/Delete/5
-        public ActionResult Delete(Guid? id)
+        public ActionResult Delete(int? id)
         {
             if (id == null)
             {
@@ -112,7 +116,7 @@ namespace RealStoriesExposed.Areas.Administration.Controllers
         // POST: Administration/Stories/Delete/5
         [HttpPost, ActionName("Delete")] 
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(Guid id)
+        public ActionResult DeleteConfirmed(int id)
         {
             Story story = Data.Stories.Find(id);
             Data.Stories.Delete(story);

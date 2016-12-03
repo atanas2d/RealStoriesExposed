@@ -22,12 +22,12 @@ namespace RealStoriesExposed
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                       "~/Scripts/bootstrap.js",
                       "~/Scripts/jqBootstrapValidation.js",
-                      "~/Scripts/clean-blog.js",
+                      "~/Scripts/realstoriesexposed.js",
                       "~/Scripts/respond.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
-                       "~/Content/clean-blog.css",
+                       "~/Content/realstoriesexposed.css",
                        "~/Content/site.css"
                      ));
 
