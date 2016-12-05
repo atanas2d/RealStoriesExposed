@@ -23,10 +23,10 @@
                 {
                     <div class="navbar-collapse collapse">
                         <ul class="nav navbar-nav">
-                            <li>@Html.ActionLink("My Profile", "index", "Manage", null, new { @class = "btn custom-btn navbar-btn" })</li>
+                            <li>@Html.ActionLink(User.Identity.Name, "Index", "Manage", null, new { @class = "btn custom-btn navbar-btn " })</li>
                             <li>@Html.ActionLink("My Stories", "index", "Manage", null, new { @class = "btn custom-btn navbar-btn" })</li>
-                            <li>@Html.ActionLink("New Story", "index", "Manage", null, new { @class = "btn custom-btn navbar-btn" })</li>
-                            <li>@Html.ActionLink("Log out", "index", "Manage", null, new { @class = "btn custom-btn navbar-btn" })</li>
+                            <li>@Html.ActionLink("New Story", "Create", "Stories", new { Area = "Administration" }, new { @class = "btn custom-btn navbar-btn" })</li>
+                            <li>@Html.ActionLink("Log out", "LogOff", "Account", null, new { @class = "btn custom-btn navbar-btn" })</li>
                         </ul>
                     </div>
                 }
@@ -40,16 +40,13 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
                     <li>
-                        <a href="index.html">Home</a>
+                        @Html.ActionLink("Home", "Index", "Home", null, new { @class = "btn custom-btn navbar-btn" })
                     </li>
                     <li>
-                        <a href="about.html">About</a>
+                        @Html.ActionLink("About", "About", "Home", null, new { @class = "btn custom-btn navbar-btn" })
                     </li>
                     <li>
-                        <a href="post.html">Sample Post</a>
-                    </li>
-                    <li>
-                        <a href="contact.html">Contact</a>
+                        @Html.ActionLink("Contact", "Contact", "Home", null, new { @class = "btn custom-btn navbar-btn" })
                     </li>
                 </ul>
             </div>

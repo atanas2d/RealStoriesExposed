@@ -1,21 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
-using RealStoriesExposed.Data;
 using RealStoriesExposed.Models;
-using AutoMapper;
 using RealStoriesExposed.Areas.Administration.ViewModels;
 using RealStoriesExposed.Controllers;
+using RealStoriesExposed.Common;
+using Microsoft.AspNet.Identity;
 
 namespace RealStoriesExposed.Areas.Administration.Controllers
 {
     public class StoriesController : BaseController
     {
+        [Authorize]
         // GET: Administration/Stories
         public ActionResult Index()
         {
@@ -24,6 +22,7 @@ namespace RealStoriesExposed.Areas.Administration.Controllers
             return View(stories);
         }
 
+        [Authorize]
         // GET: Administration/Stories/Details/5
         public ActionResult Details(int? id)
         {
@@ -39,21 +38,33 @@ namespace RealStoriesExposed.Areas.Administration.Controllers
             return View(story);
         }
 
+
+        [Authorize]
         // GET: Administration/Stories/Create
         public ActionResult Create()
         {
-            var StoryVM = new StoryViewModel();
-            StoryVM.Users = new SelectList(Data.Users.All(), "Id", "Email"); 
+            var storyVM = new StoryViewModel();
 
-            return View(StoryVM); 
+            string currentUserId = User.Identity.GetUserId().ToString();
+            var usersList = Data.Users.All();
+            if (RealStoriesExposed.Common.Constants.AdminsIDs.Contains(currentUserId))
+            {
+                storyVM.Users = new SelectList(usersList, "Id", "Email");
+            } else
+            {
+                storyVM.Users = new SelectList(usersList.Where(u => u.Id == currentUserId), "Id", "Email");
+            }            
+
+            return View(storyVM); 
         }
 
         // POST: Administration/Stories/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Title,Content,CreatedOn")] StoryViewModel story)
+        public ActionResult Create(StoryViewModel story)
         {
             if (ModelState.IsValid)
             {
@@ -67,6 +78,7 @@ namespace RealStoriesExposed.Areas.Administration.Controllers
             return View(story);
         }
 
+        [Authorize]
         // GET: Administration/Stories/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -75,22 +87,38 @@ namespace RealStoriesExposed.Areas.Administration.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Story story = Data.Stories.Find(id);
+            StoryViewModel storyVM = Mapper.Map<StoryViewModel>(story); 
+           
             if (story == null)
             {
                 return HttpNotFound();
             }
-            return View(story);
+
+            string currentUserId = User.Identity.GetUserId().ToString();
+            var usersList = Data.Users.All();
+            if (RealStoriesExposed.Common.Constants.AdminsIDs.Contains(currentUserId))
+            {
+                storyVM.Users = new SelectList(usersList, "Id", "Email");
+            }
+            else
+            {
+                storyVM.Users = new SelectList(usersList.Where(u => u.Id == currentUserId), "Id", "Email");
+            }
+
+            return View(storyVM);
         }
 
         // POST: Administration/Stories/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Title,Content,CreatedOn")] Story story)
+        public ActionResult Edit(StoryViewModel storyVM)
         {
+            var story = Mapper.Map<Story>(storyVM);
             if (ModelState.IsValid)
-            {
+            {                
                 Data.Stories.Update(story);
                 Data.Stories.SaveChanges();
                 return RedirectToAction("Index");
@@ -98,6 +126,7 @@ namespace RealStoriesExposed.Areas.Administration.Controllers
             return View(story);
         }
 
+        [Authorize]
         // GET: Administration/Stories/Delete/5
         public ActionResult Delete(int? id)
         {
@@ -116,6 +145,7 @@ namespace RealStoriesExposed.Areas.Administration.Controllers
         // POST: Administration/Stories/Delete/5
         [HttpPost, ActionName("Delete")] 
         [ValidateAntiForgeryToken]
+        [Authorize]
         public ActionResult DeleteConfirmed(int id)
         {
             Story story = Data.Stories.Find(id);
