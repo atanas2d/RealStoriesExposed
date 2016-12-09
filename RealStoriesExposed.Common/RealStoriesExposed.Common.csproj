@@ -56,7 +56,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="GeneralFunctions\" />
+    <ProjectReference Include="..\RealStoriesExposed.Models\RealStoriesExposed.Models.csproj">
+      <Project>{BA4A0A25-EF68-4CC8-B113-9762C7290E03}</Project>
+      <Name>RealStoriesExposed.Models</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

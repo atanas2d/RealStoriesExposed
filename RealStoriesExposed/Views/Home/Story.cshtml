@@ -1,0 +1,17 @@
+﻿@using RealStoriesExposed.ViewModels
+
+@model StoryViewModel
+
+<div class="post-preview">
+   
+        <h3 class="post-title">
+            @Model.Title
+        </h3>
+        <p class="post-subtitle">
+            @Model.Content
+        </p>
+   
+    <p class="post-meta">Posted by  <a href="#">@Model.Author.UserName</a> on @Model.CreatedOn</p>
+</div>
+<hr>
+

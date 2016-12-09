@@ -92,6 +92,14 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\RealStoriesExposed.Data\RealStoriesExposed.Data.csproj">
+      <Project>{D6746B06-3703-4EE5-ABDA-772DC57A2CED}</Project>
+      <Name>RealStoriesExposed.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RealStoriesExposed.Services\RealStoriesExposed.Services.csproj">
+      <Project>{d5d23751-eac7-4ec9-918b-57732eb9db6d}</Project>
+      <Name>RealStoriesExposed.Services</Name>
+    </ProjectReference>
     <ProjectReference Include="..\RealStoriesExposed\RealStoriesExposed.csproj">
       <Project>{B4454B9F-76B8-47CD-B560-BCB8DAD464DF}</Project>
       <Name>RealStoriesExposed</Name>

@@ -8,17 +8,70 @@ using RealStoriesExposed.Areas.Administration.ViewModels;
 using RealStoriesExposed.Controllers;
 using RealStoriesExposed.Common;
 using Microsoft.AspNet.Identity;
+using RealStoriesExposed.Data;
+using RealStoriesExposed.Services.Contracts;
 
 namespace RealStoriesExposed.Areas.Administration.Controllers
 {
     public class StoriesController : BaseController
     {
+        private IStoryService storyService;
+        private IUsersService usersService;
+        private SelectList _accessibleUsers;
+        private List<Story> _accessibleStories;
+
+        private SelectList AccessibleUsers {
+            get {
+                return _accessibleUsers ?? new SelectList(getAccessibleUsers(), "Id", "Email");
+            }
+            set { _accessibleUsers = value; }
+        }
+
+        
+        public List<Story> AccessibleStories {
+            get {
+                return _accessibleStories ?? getAccessibleStories().ToList();
+            }
+            set { _accessibleStories = value; }
+        }
+
+        public StoriesController(IStoryService storyService, IUsersService usersService)
+        {
+            this.storyService = storyService;
+            this.usersService = usersService;
+        }
+
+
+        private IQueryable<ApplicationUser> getAccessibleUsers()
+        {
+            string currentUserId = User.Identity.GetUserId().ToString();
+            if (RealStoriesExposed.Common.Constants.AdminsIDs.Contains(currentUserId))
+            {
+                return usersService.GetAll();
+            }
+            else
+            {
+                return usersService.GetAll().Where(u => u.Id == currentUserId);
+            }
+        }
+
+        private IQueryable<Story> getAccessibleStories()
+        {
+            string currentUserId = User.Identity.GetUserId().ToString();
+            if (!Common.Constants.AdminsIDs.Contains(currentUserId))
+            {
+                return storyService.GetAll().Where(s => s.AuthorId == currentUserId);
+            }
+
+            return storyService.GetAll();
+        }
+
         [Authorize]
         // GET: Administration/Stories
         public ActionResult Index()
         {
-            var stories = Mapper.Map<List<Story>, List<StoryViewModel>>(Data.Stories.All().ToList());
-
+            var stories = Mapper.Map<List<Story>, List<StoryViewModel>>(AccessibleStories);
+            
             return View(stories);
         }
 
@@ -30,7 +83,7 @@ namespace RealStoriesExposed.Areas.Administration.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Story story = Data.Stories.Find(id);
+            Story story = storyService.Find(id);
             if (story == null)
             {
                 return HttpNotFound();
@@ -45,15 +98,7 @@ namespace RealStoriesExposed.Areas.Administration.Controllers
         {
             var storyVM = new StoryViewModel();
 
-            string currentUserId = User.Identity.GetUserId().ToString();
-            var usersList = Data.Users.All();
-            if (RealStoriesExposed.Common.Constants.AdminsIDs.Contains(currentUserId))
-            {
-                storyVM.Users = new SelectList(usersList, "Id", "Email");
-            } else
-            {
-                storyVM.Users = new SelectList(usersList.Where(u => u.Id == currentUserId), "Id", "Email");
-            }            
+            storyVM.Users = AccessibleUsers;       
 
             return View(storyVM); 
         }
@@ -64,18 +109,20 @@ namespace RealStoriesExposed.Areas.Administration.Controllers
         [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(StoryViewModel story)
+        public ActionResult Create(StoryViewModel storyVM)
         {
+            storyVM.Users = AccessibleUsers;
+
             if (ModelState.IsValid)
             {
-                var dbStory = Mapper.Map<Story>(story);
+                var dbStory = Mapper.Map<Story>(storyVM);
                 dbStory.CreatedOn = DateTime.Now;
-                Data.Stories.Add(dbStory);
-                Data.Stories.SaveChanges();
+                storyService.Add(dbStory);
+                storyService.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(story);
+            return View(storyVM);
         }
 
         [Authorize]
@@ -86,7 +133,7 @@ namespace RealStoriesExposed.Areas.Administration.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Story story = Data.Stories.Find(id);
+            Story story = storyService.Find(id);
             StoryViewModel storyVM = Mapper.Map<StoryViewModel>(story); 
            
             if (story == null)
@@ -94,16 +141,7 @@ namespace RealStoriesExposed.Areas.Administration.Controllers
                 return HttpNotFound();
             }
 
-            string currentUserId = User.Identity.GetUserId().ToString();
-            var usersList = Data.Users.All();
-            if (RealStoriesExposed.Common.Constants.AdminsIDs.Contains(currentUserId))
-            {
-                storyVM.Users = new SelectList(usersList, "Id", "Email");
-            }
-            else
-            {
-                storyVM.Users = new SelectList(usersList.Where(u => u.Id == currentUserId), "Id", "Email");
-            }
+            storyVM.Users = AccessibleUsers;
 
             return View(storyVM);
         }
@@ -116,14 +154,17 @@ namespace RealStoriesExposed.Areas.Administration.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(StoryViewModel storyVM)
         {
-            var story = Mapper.Map<Story>(storyVM);
+            storyVM.Users = AccessibleUsers;
+                       
             if (ModelState.IsValid)
-            {                
-                Data.Stories.Update(story);
-                Data.Stories.SaveChanges();
+            {
+                var story = Mapper.Map<Story>(storyVM);
+                storyService.Update(story);
+                storyService.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(story);
+
+            return View(storyVM);
         }
 
         [Authorize]
@@ -134,7 +175,7 @@ namespace RealStoriesExposed.Areas.Administration.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Story story = Data.Stories.Find(id);
+            Story story = storyService.Find(id);
             if (story == null)
             {
                 return HttpNotFound();
@@ -148,14 +189,14 @@ namespace RealStoriesExposed.Areas.Administration.Controllers
         [Authorize]
         public ActionResult DeleteConfirmed(int id)
         {
-            Story story = Data.Stories.Find(id);
-            Data.Stories.Delete(story);
-            Data.Stories.SaveChanges();
+            Story story = storyService.Find(id);
+            storyService.Delete(story);
+            storyService.SaveChanges();
             return RedirectToAction("Index");
         } 
 
         //protected override void Dispose(bool disposing)
-        //{
+        //{ 
         //    if (disposing)
         //    {
         //        db.Dispose();

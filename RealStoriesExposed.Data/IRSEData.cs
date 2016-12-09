@@ -15,5 +15,7 @@
             get;
         }
 
+        IRepository<T> GetRepository<T>() where T : class;
+
     }
 }

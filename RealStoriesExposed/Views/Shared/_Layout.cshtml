@@ -1,9 +1,12 @@
-﻿<!DOCTYPE html>
+﻿@{
+    ViewBag.Title = "Real Stories Exposed";
+}
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <title>@ViewBag.Title</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 
@@ -24,7 +27,7 @@
                     <div class="navbar-collapse collapse">
                         <ul class="nav navbar-nav">
                             <li>@Html.ActionLink(User.Identity.Name, "Index", "Manage", null, new { @class = "btn custom-btn navbar-btn " })</li>
-                            <li>@Html.ActionLink("My Stories", "index", "Manage", null, new { @class = "btn custom-btn navbar-btn" })</li>
+                            <li>@Html.ActionLink("My Stories", "index", "Stories", new { Area = "Administration" }, new { @class = "btn custom-btn navbar-btn" })</li>
                             <li>@Html.ActionLink("New Story", "Create", "Stories", new { Area = "Administration" }, new { @class = "btn custom-btn navbar-btn" })</li>
                             <li>@Html.ActionLink("Log out", "LogOff", "Account", null, new { @class = "btn custom-btn navbar-btn" })</li>
                         </ul>
