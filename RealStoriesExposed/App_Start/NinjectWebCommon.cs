@@ -72,12 +72,12 @@ namespace RealStoriesExposed.App_Start
                 .InRequestScope();
 
             kernel
-                .Bind<IStoryService>()
-                .To<StoryService>()
+                .Bind<IStoriesService>()
+                .To<StoriesService>()
                 .InRequestScope();
 
             kernel.Bind<IUsersService>()
-                .To<UsersesService>()
+                .To<UsersService>()
                 .InRequestScope();
         }        
     }

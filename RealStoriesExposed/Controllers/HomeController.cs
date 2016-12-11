@@ -14,15 +14,15 @@ namespace RealStoriesExposed.Controllers
 {
     public class HomeController : BaseController
     {
-        private IStoryService storyService;
-        public HomeController(IStoryService service)
+        private IStoriesService _storiesService;
+        public HomeController(IStoriesService service)
         {
-            storyService = service;
+            _storiesService = service;
         }
 
         public ActionResult Index()
         {
-            var stories = Mapper.Map<List<Story>, List<StoryViewModel>>(storyService.GetAll().ToList());
+            var stories = Mapper.Map<List<Story>, List<StoryViewModel>>(_storiesService.GetAll().ToList());
 
             return View(stories);
         }
@@ -47,7 +47,7 @@ namespace RealStoriesExposed.Controllers
                 return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest);
             }
 
-            var storyDB = storyService.Find(id);
+            var storyDB = _storiesService.Find(id);
             var storyVM = Mapper.Map<StoryViewModel>(storyDB);
             return View(storyVM);
         }

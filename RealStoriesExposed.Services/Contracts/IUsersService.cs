@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,10 +8,8 @@ using RealStoriesExposed.Models;
 
 namespace RealStoriesExposed.Services.Contracts
 {
-    public interface IUsersService
+    public interface IUsersService : IService<ApplicationUser>
     {
-        IQueryable<ApplicationUser> GetAll();
-
-        ApplicationUser Find(object id);
+        IQueryable<ApplicationUser> GetAccessibleUsers(object userId);
     }
 }

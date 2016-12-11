@@ -1,6 +1,10 @@
-﻿.custom-btn {
+﻿.navbar-custom .nav li a.custom-btn {
     border-radius: 10px;
-    padding: 5px 8px !important;
+    padding: 5px 8px;
     opacity: .8;
     margin: 5px;
+}
+
+.btn.custom-btn-small {
+    padding: 3px 5px;
 }

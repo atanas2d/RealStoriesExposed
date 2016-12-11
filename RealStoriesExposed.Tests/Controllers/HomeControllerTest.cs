@@ -7,6 +7,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using RealStoriesExposed;
 using RealStoriesExposed.Controllers;
 using RealStoriesExposed.Data;
+using RealStoriesExposed.Services;
 using RealStoriesExposed.Services.Contracts;
 
 namespace RealStoriesExposed.Tests.Controllers
@@ -14,7 +15,7 @@ namespace RealStoriesExposed.Tests.Controllers
     [TestClass]
     public class HomeControllerTest
     {
-        private IStoryService service;
+        private IStoriesService service = new StoriesService(new RSEData());
 
 
         [TestMethod]
