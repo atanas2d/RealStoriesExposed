@@ -9,7 +9,7 @@
     <script>
         tinymce.init({
             selector: 'textarea',
-            height: 500,
+            height: 200,
             menubar: false,
             plugins: [
               'advlist autolink lists link image charmap print preview anchor',
@@ -68,5 +68,5 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Back", "Index", null, new { @class = "btn btn-primary custom-btn-small" })
 </div>
